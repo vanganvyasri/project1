@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - EZA Skincare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-image: url('/images/background7.jpg'); /* Path to your background image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: rgba(255, 255, 255, 0.8); /* Set background color and opacity */
+            padding: 1%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000; /* Ensure header stays on top */
+            backdrop-filter: blur(10px); /* Optional: Adds a blur effect */
+            top: 0;
+        }
+        footer {
+            background: rgba(255, 255, 255, 0.8); /* Set background color and opacity */
+            padding: 1%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            z-index: 1000; /* Ensure footer stays on top */
+            backdrop-filter: blur(10px); /* Optional: Adds a blur effect */
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        nav a, .center-button {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Adjust gap between navigation items */
+        }
+        .center-button {
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            flex-grow: 3; /* Centering EZA Skincare */
+            text-align: center;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-left: auto; /* Pushes the search bar to the right */
+            margin-right: 20px; /* Adds some margin to separate from EZA Skincare */
+        }
+        #searchForm {
+            display: flex;
+            align-items: center;
+        }
+        #searchInput {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-right: 5px;
+            width: 200px; /* Adjust as needed */
+        }
+        #searchInput:focus {
+            outline: none;
+            border-color: #555; /* Example of focus style */
+        }
+        #searchButton {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #searchButton:hover {
+            background-color: #555;
+        }
+        .main-content {
+            margin-top: 70px;
+            padding: 20px;
+            padding-bottom: 80px; /* Adjust padding to ensure content above footer */
+        }
+        .description {
+            background: rgba(237, 244, 247, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+            margin-top: 160px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .description h1 {
+            font-size: 36px;
+        }
+        .description p {
+            font-size: 18px;
+        }
+        .search-results {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .social-icons a {
+            color: black;
+            font-size: 24px;
+            text-decoration: none;
+        }
+        .contact-form {
+            margin-top: 10px;
+        }
+        .contact-form input[type="email"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .contact-form button {
+            padding: 5px 10px;
+            border: none;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .contact-form button:hover {
+            background-color: #555;
+        }
+        .footer-details {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="shop.html">New Launches</a>
+            <a href="shop.html">Shop</a>
+        </nav>
+        <center>
+        <button class="center-button">EZA Skincare</button>
+        </center>
+        <div class="search-container">
+            <form id="searchForm" onsubmit="return searchFunction()">
+                <input type="text" id="searchInput" placeholder="Search...">
+                <button type="submit" id="searchButton">Search</button>
+            </form>
+        </div>
+        <nav>
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i>  c</a>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="description">
+            <h1>Search Results</h1>
+            <div id="searchResults" class="search-results">
+                <!-- Search results will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="contact-form">
+                <label for="email">Contact us:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email">
+                <button type="submit">Submit</button>
+            </div>
+            <div class="social-icons">
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+            <div class="footer-details">
+                <p>&copy; 2022 EZA Skincare. All rights reserved.</p>
+                <p>Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function searchFunction() {
+            event.preventDefault(); // Prevent form submission
+
+            var searchQuery = document.getElementById("searchInput").value.trim();
+
+            // Mocking search results (you would fetch data from a backend or other source)
+            var searchResults = [
+                "Product 1",
+                "Product 2",
+                "Product 3"
+            ];
+
+            // Clear previous search results
+            document.getElementById("searchResults").innerHTML = "";
+
+            if (searchQuery !== "") {
+                // Display search results
+                var foundResults = searchResults.filter(result =>
+                    result.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+
+                if (foundResults.length > 0) {
+                    foundResults.forEach(result => {
+                        var resultElement = document.createElement("p");
+                        resultElement.textContent = result;
+                        document.getElementById("searchResults").appendChild(resultElement);
+                    });
+                } else {
+                    // No results found message
+                    var noResultsMessage = document.createElement("p");
+                    noResultsMessage.textContent = "No results found for: " + searchQuery;
+                    noResultsMessage.style.color = "red";
+                    document.getElementById("searchResults").appendChild(noResultsMessage);
+                }
+            }
+
+            return false; // Prevent default form behavior
+        }
+    </script>
+</body>
+</html>
